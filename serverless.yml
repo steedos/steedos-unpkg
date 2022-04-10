@@ -1,0 +1,12 @@
+service: aws-steedos-unpkg
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  api:
+    handler: serverless.handler
+    events:
+      - httpApi: '*'

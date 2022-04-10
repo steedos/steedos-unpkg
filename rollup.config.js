@@ -71,10 +71,11 @@ const dependencies = (process.env.NODE_ENV === 'development'
   : Object.keys(pkg.dependencies)
 ).concat('react-dom/server');
 
-const server = {
+const server = ['server', 'serverless'].map(entryName => {
+return {
   external: builtinModules.concat(dependencies),
-  input: 'modules/server.js',
-  output: { file: 'server.js', format: 'cjs' },
+  input: `modules/${entryName}.js`,
+  output: { file: `${entryName}.js`, format: 'cjs' },
   moduleContext: {
     'node_modules/react-icons/lib/esm/iconBase.js': 'global'
   },
@@ -93,6 +94,6 @@ const server = {
       'process.env.BUILD_ID': JSON.stringify(buildId)
     })
   ]
-};
+}});
 
-module.exports = client.concat(server);
+module.exports = client.concat(server)
