@@ -41,6 +41,7 @@
     "react-dom": "^16.8.6",
     "react-icons": "^3.7.0",
     "semver": "^5.6.0",
+    "serverless-domain-manager": "^6.0.3",
     "serverless-http": "^3.0.1",
     "sort-by": "^1.2.0",
     "sri-toolbox": "^0.2.0",

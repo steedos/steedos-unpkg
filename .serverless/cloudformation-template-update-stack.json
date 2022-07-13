@@ -161,7 +161,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/aws-steedos-unpkg/dev/1649609172175-2022-04-10T16:46:12.175Z/aws-steedos-unpkg.zip"
+          "S3Key": "serverless/aws-steedos-unpkg/dev/1657700314560-2022-07-13T08:18:34.560Z/aws-steedos-unpkg.zip"
         },
         "Handler": "serverless.handler",
         "Runtime": "nodejs14.x",
@@ -179,14 +179,14 @@
         "ApiLogGroup"
       ]
     },
-    "ApiLambdaVersionS3NHkHCWL5mqNH6InCFZGe35OFKZQr4tomX7qKzgyoI": {
+    "ApiLambdaVersionXnwGHCEKxGbK5zDFNBzaWPt0ORJiULHt67fxZCMIM3I": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "JhF2qen+NxLlntBU149CV30Z8Mbg+FyBdEMqhdGtmV8="
+        "CodeSha256": "Wz8K69IEM3KKvAgvHNxk3IZI1gfGyppk0ld3mWbSHhE="
       }
     },
     "HttpApi": {
@@ -297,7 +297,7 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersionS3NHkHCWL5mqNH6InCFZGe35OFKZQr4tomX7qKzgyoI"
+        "Ref": "ApiLambdaVersionXnwGHCEKxGbK5zDFNBzaWPt0ORJiULHt67fxZCMIM3I"
       },
       "Export": {
         "Name": "sls-aws-steedos-unpkg-dev-ApiLambdaFunctionQualifiedArn"

@@ -1,12 +1,27 @@
 service: aws-steedos-unpkg
-frameworkVersion: '2'
+frameworkVersion: '3'
 
 provider:
   name: aws
   runtime: nodejs14.x
+  region: cn-northwest-1
+  stage: dev
 
 functions:
   api:
     handler: serverless.handler
     events:
       - httpApi: '*'
+
+plugins:
+  - serverless-domain-manager
+ 
+custom:
+  customDomain:
+    domainName: unpkg.steedos.cn
+    certificateName: '*.steedos.cn'
+    certificateArn: 'arn:aws-cn:acm:cn-northwest-1:252208178451:certificate/a609d90e-84cd-42f3-951d-2ea1d5a48a79'
+    basePath: ''
+    stage: ${self:provider.stage}
+    endpointType: 'regional'
+    createRoute53Record: true

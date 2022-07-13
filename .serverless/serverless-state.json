@@ -7,8 +7,8 @@
     "provider": {
       "name": "aws",
       "runtime": "nodejs14.x",
+      "region": "cn-northwest-1",
       "stage": "dev",
-      "region": "us-east-1",
       "versionFunctions": true,
       "compiledCloudFormationTemplate": {
         "AWSTemplateFormatVersion": "2010-09-09",
@@ -173,7 +173,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-steedos-unpkg/dev/1649609172175-2022-04-10T16:46:12.175Z/aws-steedos-unpkg.zip"
+                "S3Key": "serverless/aws-steedos-unpkg/dev/1657700314560-2022-07-13T08:18:34.560Z/aws-steedos-unpkg.zip"
               },
               "Handler": "serverless.handler",
               "Runtime": "nodejs14.x",
@@ -191,14 +191,14 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersionS3NHkHCWL5mqNH6InCFZGe35OFKZQr4tomX7qKzgyoI": {
+          "ApiLambdaVersionXnwGHCEKxGbK5zDFNBzaWPt0ORJiULHt67fxZCMIM3I": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "JhF2qen+NxLlntBU149CV30Z8Mbg+FyBdEMqhdGtmV8="
+              "CodeSha256": "Wz8K69IEM3KKvAgvHNxk3IZI1gfGyppk0ld3mWbSHhE="
             }
           },
           "HttpApi": {
@@ -306,7 +306,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionS3NHkHCWL5mqNH6InCFZGe35OFKZQr4tomX7qKzgyoI"
+              "Ref": "ApiLambdaVersionXnwGHCEKxGbK5zDFNBzaWPt0ORJiULHt67fxZCMIM3I"
             },
             "Export": {
               "Name": "sls-aws-steedos-unpkg-dev-ApiLambdaFunctionQualifiedArn"
@@ -432,6 +432,20 @@
       },
       "vpc": {}
     },
+    "custom": {
+      "customDomain": {
+        "domainName": "unpkg.steedos.cn",
+        "certificateName": "*.steedos.cn",
+        "certificateArn": "arn:aws-cn:acm:cn-northwest-1:252208178451:certificate/a609d90e-84cd-42f3-951d-2ea1d5a48a79",
+        "basePath": "",
+        "stage": "dev",
+        "endpointType": "regional",
+        "createRoute53Record": true
+      }
+    },
+    "plugins": [
+      "serverless-domain-manager"
+    ],
     "pluginsData": {},
     "functions": {
       "api": {
@@ -448,29 +462,33 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersionS3NHkHCWL5mqNH6InCFZGe35OFKZQr4tomX7qKzgyoI"
+        "versionLogicalId": "ApiLambdaVersionXnwGHCEKxGbK5zDFNBzaWPt0ORJiULHt67fxZCMIM3I"
       }
     },
     "configValidationMode": "warn",
     "serviceFilename": "serverless.yml",
     "initialServerlessConfig": {
-      "service": {
-        "$ref": "$[\"service\"][\"serviceObject\"]"
-      },
-      "frameworkVersion": "2",
+      "service": "aws-steedos-unpkg",
+      "frameworkVersion": "3",
       "provider": {
         "$ref": "$[\"service\"][\"provider\"]"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
+      },
+      "plugins": {
+        "$ref": "$[\"service\"][\"plugins\"]"
+      },
+      "custom": {
+        "$ref": "$[\"service\"][\"custom\"]"
       }
     },
     "layers": {},
     "isDashboardMonitoringPreconfigured": false,
-    "artifact": "/Users/steedos/Documents/GitHub/steedos-unpkg/.serverless/aws-steedos-unpkg.zip"
+    "artifact": "/workspace/steedos-unpkg/.serverless/aws-steedos-unpkg.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/aws-steedos-unpkg/dev/1649609172175-2022-04-10T16:46:12.175Z",
+    "artifactDirectoryName": "serverless/aws-steedos-unpkg/dev/1657700314560-2022-07-13T08:18:34.560Z",
     "artifact": "aws-steedos-unpkg.zip"
   }
 }
