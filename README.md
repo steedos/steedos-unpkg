@@ -12,15 +12,3 @@ Please visit [the UNPKG website](https://unpkg.com) to learn more about how to u
 ### Sponsors
 
 Our sponsors and backers are listed [in SPONSORS.md](SPONSORS.md).
-
-## Deploy
-
-
-```bash
-export SERVERLESS_PLATFORM_VENDOR=aws
-export AWS_DEFAULT_REGION=cn-northwest-1
-export AWS_ACCESS_KEY_ID=
-export AWS_SECRET_ACCESS_KEY=
-serverless
-serverless create_domain
-```
