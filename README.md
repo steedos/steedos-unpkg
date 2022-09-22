@@ -13,8 +13,20 @@ Please visit [the UNPKG website](https://unpkg.com) to learn more about how to u
 
 Our sponsors and backers are listed [in SPONSORS.md](SPONSORS.md).
 
-### Build Docker
+### Getting started
 
 ```
-docker build --tag steedos/steedos-unpkg .
+yarn install
+yarn build
+docker build --tag steedos/steedos-unpkg:0.0.1 .
+
+export PORT=8080
+export UNPKG_WHITE_LIST=react,@steedos,lodash
+docker run -p 8080:8080 -d steedos/steedos-unpkg 
 ```
+
+### `UNPKG_WHITE_LIST`
+
+- 环境变量用于控制允许访问的包关键词，用逗号隔开。
+- 任何包只要包含其中任何一个关键词都可以访问。 
+- 如果未配置环境变量，则不做任何限制。
