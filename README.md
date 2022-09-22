@@ -18,7 +18,7 @@ Our sponsors and backers are listed [in SPONSORS.md](SPONSORS.md).
 ```
 yarn install
 yarn build
-docker build --tag steedos/steedos-unpkg:0.0.1 .
+docker build --tag steedos/steedos-unpkg .
 
 export PORT=8080
 export UNPKG_WHITE_LIST=react,@steedos,lodash
