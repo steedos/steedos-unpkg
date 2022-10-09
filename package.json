@@ -1,7 +1,18 @@
 {
-  "name": "@steedos/steedos-unpkg",
-  "private": true,
+  "name": "@steedos-labs/unpkg",
+  "version": "0.0.1",
   "description": "The CDN for everything on npm",
+  "files": [
+    "createServer.js",
+    "server.js",
+    "public"
+  ],
+  "main": "createServer.js",
+  "license": "MIT",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "rollup -c",
     "clean": "git clean -e '!/.env' -fdX .",

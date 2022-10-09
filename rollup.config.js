@@ -71,7 +71,7 @@ const dependencies = (process.env.NODE_ENV === 'development'
   : Object.keys(pkg.dependencies)
 ).concat('react-dom/server');
 
-const server = ['server'].map(entryName => {
+const server = ['server','createServer'].map(entryName => {
 return {
   external: builtinModules.concat(dependencies),
   input: `modules/${entryName}.js`,

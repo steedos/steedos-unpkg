@@ -14,7 +14,7 @@ var url = _interopDefault(require('url'));
 var https = _interopDefault(require('https'));
 var gunzip = _interopDefault(require('gunzip-maybe'));
 var LRUCache = _interopDefault(require('lru-cache'));
-var server$1 = require('react-dom/server');
+var server = require('react-dom/server');
 var semver = _interopDefault(require('semver'));
 var core = require('@emotion/core');
 var React = require('react');
@@ -1249,9 +1249,9 @@ async function serveBrowsePage(req, res) {
     filename: req.filename,
     target: req.browseTarget
   };
-  const content = createHTML$1(server$1.renderToString(React.createElement(App, data)));
+  const content = createHTML$1(server.renderToString(React.createElement(App, data)));
   const elements = getScripts('browse', 'iife', globalURLs);
-  const html = doctype + server$1.renderToStaticMarkup(React.createElement(MainTemplate, {
+  const html = doctype + server.renderToStaticMarkup(React.createElement(MainTemplate, {
     title: `UNPKG - ${req.packageName}`,
     description: `The CDN for ${req.packageName}`,
     data,
@@ -3164,9 +3164,9 @@ const globalURLs$1 = process.env.NODE_ENV === 'production' || process.env.NODE_E
   'react-dom': '/react-dom@16.8.6/umd/react-dom.development.js'
 };
 function serveMainPage(req, res) {
-  const content = createHTML$1(server$1.renderToString(React.createElement(App$1)));
+  const content = createHTML$1(server.renderToString(React.createElement(App$1)));
   const elements = getScripts('main', 'iife', globalURLs$1);
-  const html = doctype$1 + server$1.renderToStaticMarkup(React.createElement(MainTemplate, {
+  const html = doctype$1 + server.renderToStaticMarkup(React.createElement(MainTemplate, {
     content,
     elements
   }));
@@ -3847,8 +3847,4 @@ function createServer() {
   });
 }
 
-const server = createServer();
-const port = process.env.PORT || '8080';
-server.listen(port, () => {
-  console.log('Server listening on port %s, Ctrl+C to quit', port);
-});
+module.exports = createServer;
