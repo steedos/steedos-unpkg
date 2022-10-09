@@ -1,6 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 import morgan from 'morgan';
+import compression from 'compression';
 
 import serveDirectoryBrowser from './actions/serveDirectoryBrowser.js';
 import serveDirectoryMetadata from './actions/serveDirectoryMetadata.js';
@@ -39,6 +40,7 @@ export default function createServer() {
 
     app.use(cors());
     app.use(express.static('public', { maxAge: '1y' }));
+    app.use(compression());
 
     app.use(requestLog);
 
