@@ -21,6 +21,7 @@ yarn build
 docker build --tag steedos/steedos-unpkg .
 
 export PORT=8080
+export NPM_REGISTRY_URL=https://registry.npmmirror.com
 export UNPKG_WHITE_LIST=react,@steedos,lodash
 docker run -p 8080:8080 -d steedos/steedos-unpkg 
 ```
@@ -30,3 +31,8 @@ docker run -p 8080:8080 -d steedos/steedos-unpkg
 - 环境变量用于控制允许访问的包关键词，用逗号隔开。
 - 任何包只要包含其中任何一个关键词都可以访问。 
 - 如果未配置环境变量，则不做任何限制。
+
+### `NPM_REGISTRY_URL`
+
+- 环境变量用与设置NPM仓库
+- 淘宝源：NPM_REGISTRY_URL=https://registry.npmmirror.com
