@@ -180,7 +180,12 @@ export async function getPackage(packageName, version, log) {
     path: pathname
   };
 
-  const res = await get(options);
+  let res = await get(options);
+
+  if (res.statusCode == 302) {
+    console.log(res.headers)
+    res = await get(res.headers.location);
+  }
 
   if (res.statusCode === 200) {
     const stream = res.pipe(gunzip());
