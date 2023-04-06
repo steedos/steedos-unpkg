@@ -59,6 +59,7 @@ NPM_CACHE_PACKAGE_CONTENT=true
 1. 在公网环境启动服务；
 2. 配置 NPM_CACHE_ENABLED 相关环境变量；
 3. 使用浏览器访问需要缓存的软件包和版本；
-4. 在内网环境启动服务；
-5. 配置 NPM_CACHE_ENABLED 相关环境变量；
-6. 将公网服务器的缓存文件夹(caches)复制到内网环境。
+4. 系统会自动为对应的软件包创建缓存文件，保存到缓存文件夹(caches)；
+5. 在内网环境启动服务；
+6. 配置 NPM_CACHE_ENABLED 相关环境变量；
+7. 将公网服务器的缓存文件夹(caches)复制到内网环境。
