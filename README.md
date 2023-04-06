@@ -39,7 +39,7 @@ docker run -p 8080:8080 -d steedos/steedos-unpkg
 
 ### `NPM_CACHE_ENABLED`
 
-对于无法访问外网的本地环境，可以在本地文件夹中环村npm信息。
+可以在本地文件夹中缓存npm信息。
 
 - NPM_CACHE_ENABLED 启用缓存。
 - NPM_CACHE_FOLDER 缓存文件夹的路径，默认为 caches 子文件夹。
@@ -53,3 +53,12 @@ NPM_CACHE_FOLDER=/caches/
 NPM_CACHE_PACKAGE_INFO=true
 NPM_CACHE_PACKAGE_CONTENT=true
 ```
+
+## 纯内网环境使用CDN
+
+1. 在公网环境启动服务；
+2. 配置 NPM_CACHE_ENABLED 相关环境变量；
+3. 使用浏览器访问需要缓存的软件包和版本；
+4. 在内网环境启动服务；
+5. 配置 NPM_CACHE_ENABLED 相关环境变量；
+6. 将公网服务器的缓存文件夹(caches)复制到内网环境。
