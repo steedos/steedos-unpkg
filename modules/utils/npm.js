@@ -2,11 +2,32 @@ import url from 'url';
 import https from 'https';
 import gunzip from 'gunzip-maybe';
 import LRUCache from 'lru-cache';
+import path from 'path';
+import fs from 'fs';
 
 import bufferStream from './bufferStream.js';
 
 const npmRegistryURL =
   process.env.NPM_REGISTRY_URL || 'https://registry.npmjs.org';
+
+const npmCacheEnabled = process.env.NPM_CACHE_ENABLED
+const npmCacheFolder =
+  process.env.NPM_CACHE_FOLDER || path.join(__dirname, 'caches');
+
+if (npmCacheEnabled) {
+  fs.mkdir(npmCacheFolder,
+    { recursive: true }, (err) => {
+      if (err) {
+        return console.error(err);
+      }
+    });;
+}
+
+const npmCachePackageInfo =
+  process.env.NPM_CACHE_PACKAGE_INFO;
+
+const npmCachePackageContent =
+  process.env.NPM_CACHE_PACKAGE_CONTENT;
 
 const agent = new https.Agent({
   keepAlive: true
@@ -43,6 +64,15 @@ function encodePackageName(packageName) {
 async function fetchPackageInfo(packageName, log) {
   const name = encodePackageName(packageName);
   const infoURL = `${npmRegistryURL}/${name}`;
+packageName.split('/').join('_')
+  if (npmCacheEnabled && npmCacheFolder ) {
+    const infoFile = path.join(npmCacheFolder, packageName.split('/').join('_') + `.json`);
+    if (fs.existsSync(infoFile)) {
+      log.debug('Fetching package info for %s from %s', packageName, infoFile);
+      const fileStream = fs.createReadStream(infoFile);
+      return bufferStream(fileStream).then(JSON.parse);
+    }
+  }
 
   log.debug('Fetching package info for %s from %s', packageName, infoURL);
 
@@ -59,7 +89,15 @@ async function fetchPackageInfo(packageName, log) {
   const res = await get(options);
 
   if (res.statusCode === 200) {
+
+    if (npmCacheEnabled && npmCacheFolder && npmCachePackageInfo ) {
+      const infoFile = path.join(npmCacheFolder, packageName.split('/').join('_') + `.json`);
+      log.debug('Caching package info for %s to %s', packageName, infoFile);
+      const fileStream = fs.createWriteStream(infoFile);
+      res.pipe(fileStream);
+    }
     return bufferStream(res).then(JSON.parse);
+
   }
 
   if (res.statusCode === 404) {
@@ -133,7 +171,9 @@ function cleanPackageConfig(config) {
 }
 
 async function fetchPackageConfig(packageName, version, log) {
+  
   const info = await fetchPackageInfo(packageName, log);
+
   return info && info.versions && version in info.versions
     ? cleanPackageConfig(info.versions[version])
     : null;
@@ -169,6 +209,16 @@ export async function getPackage(packageName, version, log) {
   const tarballName = isScopedPackageName(packageName)
     ? packageName.split('/')[1]
     : packageName;
+  
+  if (npmCacheEnabled && npmCacheFolder) {
+    const tarballFile = path.join(npmCacheFolder, packageName.split('/').join('_') + `-${version}.tgz`);
+    if (fs.existsSync(tarballFile)) {
+      log.debug('Fetching package for %s from %s', packageName, tarballFile);
+      const fileStream = fs.createReadStream(tarballFile);
+      const stream = fileStream.pipe(gunzip());
+      return stream;
+    }
+  }
   const tarballURL = `${npmRegistryURL}/${packageName}/-/${tarballName}-${version}.tgz`;
 
   log.debug('Fetching package for %s from %s', packageName, tarballURL);
@@ -183,13 +233,21 @@ export async function getPackage(packageName, version, log) {
   let res = await get(options);
 
   if (res.statusCode == 302) {
-    console.log(res.headers)
     res = await get(res.headers.location);
   }
 
   if (res.statusCode === 200) {
     const stream = res.pipe(gunzip());
     // stream.pause();
+
+    if (npmCacheEnabled && npmCacheFolder && npmCachePackageContent ) {
+      const tarballFile = path.join(npmCacheFolder, packageName.split('/').join('_') + `-${version}.tgz`);
+      log.debug('Caching package for %s to %s', packageName, tarballFile);
+      const fileStream = fs.createWriteStream(tarballFile);
+      stream.pipe(fileStream);
+
+      return stream;
+    }
     return stream;
   }
 

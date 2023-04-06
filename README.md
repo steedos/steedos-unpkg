@@ -36,3 +36,23 @@ docker run -p 8080:8080 -d steedos/steedos-unpkg
 
 - 环境变量用与设置NPM仓库
 - 淘宝源：NPM_REGISTRY_URL=https://registry.npmmirror.com
+
+### `NPM_CACHE_FOLDER`
+
+对于无法访问外网的本地环境，可以在本地文件夹中获取npm信息。
+
+- NPM_CACHE_ENABLED 启用缓存。
+- NPM_CACHE_FOLDER 缓存文件夹的路径，默认为 caches 子文件夹。
+- NPM_CACHE_PACKAGE_INFO 自动保存软件包信息到本地缓存。启用此参数，软件包版本更新后，无法获得最新的信息。
+- NPM_CACHE_PACKAGE_CONTENT 自动保存软件包内容到本地缓存。
+
+```shell
+NPM_CACHE_FOLDER=/caches/
+NPM_CACHE_PACKAGE_INFO=true
+NPM_CACHE_PACKAGE_CONTENT=true
+```
+
+### `NPM_CACHE_PACKAGE_INFO`
+
+
+### `NPM_CACHE_PACKAGE_CONTENT`
