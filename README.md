@@ -26,18 +26,27 @@ export UNPKG_WHITE_LIST=react,@steedos,lodash
 docker run -p 8080:8080 -d steedos/steedos-unpkg 
 ```
 
-### `UNPKG_WHITE_LIST`
+### 白名单
+
+限制CDN服务器只能访问指定的包。
+
+```
+export UNPKG_WHITE_LIST=react,@steedos,lodash
+```
 
 - 环境变量用于控制允许访问的包关键词，用逗号隔开。
 - 任何包只要包含其中任何一个关键词都可以访问。 
 - 如果未配置环境变量，则不做任何限制。
 
-### `NPM_REGISTRY_URL`
+### 远程NPM仓库
 
-- 环境变量用与设置NPM仓库
-- 淘宝源：NPM_REGISTRY_URL=https://registry.npmmirror.com
+设置远程NPM仓库，UNPKG将从此仓库下载软件包。
 
-### `NPM_CACHE_ENABLED`
+```
+NPM_REGISTRY_URL=https://registry.npmmirror.com
+```
+
+### NPM 缓存
 
 可以在本地文件夹中缓存npm信息。
 
@@ -50,11 +59,10 @@ docker run -p 8080:8080 -d steedos/steedos-unpkg
 DEBUG=1
 NPM_CACHE_ENABLED=true
 NPM_CACHE_FOLDER=/caches/
-NPM_CACHE_PACKAGE_INFO=true
 NPM_CACHE_PACKAGE_CONTENT=true
 ```
 
-## 纯内网环境使用CDN
+### 纯内网环境使用CDN
 
 如果服务器也不能访问外网，可以按以下步骤操作，创建本地缓存。但是缺点是有新的包更新后需要重新下载缓存。
 
@@ -66,7 +74,7 @@ NPM_CACHE_PACKAGE_CONTENT=true
 6. 配置 NPM_CACHE_ENABLED 相关环境变量；
 7. 将公网服务器的缓存文件夹(caches)复制到内网环境。
 
-## 手工更新缓存文件夹
+### 手工更新缓存文件夹
 
 可以手工或编写脚本更新缓存文件夹。
 
