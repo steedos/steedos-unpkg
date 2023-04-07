@@ -5,15 +5,11 @@
 
 [UNPKG](https://unpkg.com) is a fast, global [content delivery network](https://en.wikipedia.org/wiki/Content_delivery_network) for everything on [npm](https://www.npmjs.com/).
 
-### Documentation
+## Documentation
 
 Please visit [the UNPKG website](https://unpkg.com) to learn more about how to use it.
 
-### Sponsors
-
-Our sponsors and backers are listed [in SPONSORS.md](SPONSORS.md).
-
-### Getting started
+## Getting started
 
 ```
 yarn install
@@ -26,7 +22,7 @@ export UNPKG_WHITE_LIST=react,@steedos,lodash
 docker run -p 8080:8080 -d steedos/steedos-unpkg 
 ```
 
-### 白名单
+## 白名单
 
 限制CDN服务器只能访问指定的包。
 
@@ -38,7 +34,7 @@ export UNPKG_WHITE_LIST=react,@steedos,lodash
 - 任何包只要包含其中任何一个关键词都可以访问。 
 - 如果未配置环境变量，则不做任何限制。
 
-### 远程NPM仓库
+## 远程NPM仓库
 
 设置远程NPM仓库，UNPKG将从此仓库下载软件包。
 
@@ -46,7 +42,7 @@ export UNPKG_WHITE_LIST=react,@steedos,lodash
 NPM_REGISTRY_URL=https://registry.npmmirror.com
 ```
 
-### NPM 缓存
+## NPM 缓存
 
 可以在本地文件夹中缓存npm信息。
 
