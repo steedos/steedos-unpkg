@@ -70,7 +70,7 @@ NPM_CACHE_ENABLED=true
 NPM_CACHE_FOLDER=/caches/
 ```
 
-### 手工更新缓存文件夹。
+### 手工更新缓存文件夹
 
 在可以访问公网的服务器上用脚本，生成 /caches/ 文件夹，复制到内网环境。
 
