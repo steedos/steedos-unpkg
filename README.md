@@ -65,3 +65,15 @@ NPM_CACHE_PACKAGE_CONTENT=true
 5. 在内网环境启动服务；
 6. 配置 NPM_CACHE_ENABLED 相关环境变量；
 7. 将公网服务器的缓存文件夹(caches)复制到内网环境。
+
+## 手工更新缓存文件夹
+
+可以手工或编写脚本更新缓存文件夹。
+
+```
+cd /caches/
+curl -o react.json https://registry.npmjs.com/react
+curl -o react-18.2.0.tgz https://registry.npmjs.com/react/-/react-18.2.0.tgz
+curl -o @steedos-widgets_amis-object.json https://registry.npmjs.com/@steedos-widgets/amis-object
+curl -o @steedos-widgets_amis-object-1.1.6.tgz https://registry.npmjs.com/@steedos-widgets/amis-object/-/amis-object-1.1.6.tgz
+```
