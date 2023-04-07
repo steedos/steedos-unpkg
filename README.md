@@ -74,6 +74,8 @@ NPM_CACHE_FOLDER=/caches/
 
 在可以访问公网的服务器上用脚本，生成 /caches/ 文件夹，复制到内网环境。
 
+> 注意，`@organization/package` 格式的软件包，需要保存为 `@organization_package`
+
 ```
 cd /caches/
 curl -o react.json https://registry.npmjs.com/react
