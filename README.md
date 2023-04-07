@@ -84,7 +84,7 @@ curl -o @steedos-widgets_amis-object-1.1.6.tgz https://registry.npmjs.com/@steed
 
 ### 自动更新缓存文件夹
 
-在可以访问公网的服务器上启动服务，生成 /caches/ 文件夹，复制到内网环境。
+在可以访问公网的服务器上启动服务，访问需要缓存的软件包版本，生成 /caches/ 文件夹，复制到内网环境。
 
 ```shell
 DEBUG=1
