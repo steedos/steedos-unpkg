@@ -95,3 +95,11 @@ NPM_CACHE_FOLDER=/caches/
 NPM_CACHE_PACKAGE_INFO=true
 NPM_CACHE_PACKAGE_CONTENT=true
 ```
+
+### 与华炎魔方集成
+
+配置环境变量指向本服务，可以启用此服务作为华炎魔方内置的CDN服务。
+
+```
+STEEDOS_UNPKG_URL=http://127.0.0.1:8080
+```
