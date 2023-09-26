@@ -10,7 +10,7 @@ import bufferStream from './bufferStream.js';
 const npmRegistryURL =
   process.env.NPM_REGISTRY_URL || 'https://registry.npmjs.org';
 
-const npmCacheEnabled = process.env.NPM_CACHE_ENABLED
+const npmCacheEnabled = process.env.NPM_CACHE_ENABLED === 'true'
 const npmCacheFolder =
   process.env.NPM_CACHE_FOLDER || path.join(__dirname, 'caches');
 
@@ -24,10 +24,10 @@ if (npmCacheEnabled) {
 }
 
 const npmCachePackageInfo =
-  process.env.NPM_CACHE_PACKAGE_INFO;
+  process.env.NPM_CACHE_PACKAGE_INFO === 'true';
 
 const npmCachePackageContent =
-  process.env.NPM_CACHE_PACKAGE_CONTENT;
+  process.env.NPM_CACHE_PACKAGE_CONTENT === 'true';
 
 const agent = new https.Agent({
   keepAlive: true
