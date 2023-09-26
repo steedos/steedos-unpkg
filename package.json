@@ -1,11 +1,13 @@
 {
   "name": "@steedos/ee_unpkg",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The CDN for everything on npm",
   "files": [
+    "createServer.js",
     "server.js",
     "public"
   ],
+  "main": "createServer.js",
   "license": "MIT",
   "private": false,
   "publishConfig": {
@@ -15,7 +17,7 @@
     "build": "rollup -c",
     "clean": "git clean -e '!/.env' -fdX .",
     "lint": "eslint .",
-    "serve": "nodemon -w server.js server.js",
+    "serve": "nodemon -w createServer.js server.js",
     "start": "node server.js",
     "test": "jest",
     "watch": "rollup -c -w"
