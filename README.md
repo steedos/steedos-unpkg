@@ -63,6 +63,8 @@ NPM_CACHE_FOLDER=/caches/
 
 1. 在内网环境启动服务；
 2. 配置 NPM_CACHE_ENABLED 相关环境变量；
+3. 参考 [自动更新缓存文件夹](#自动更新缓存文件夹) 在联网服务器上启动服务并缓存资产包到/caches；
+4. 将联网服务器上缓存的caches文件夹拷贝到内网环境中并替换本地的caches文件夹；
 
 ```shell
 DEBUG=1
