@@ -91,10 +91,10 @@ curl -o @steedos-widgets_amis-object-1.1.6.tgz https://registry.npmjs.com/@steed
 在可以访问公网的服务器上启动服务，访问需要缓存的软件包版本，生成 /caches/ 文件夹，复制到内网环境。
 
 ```shell
-DEBUG=1
+NPM_REGISTRY_URL=https://registry.npmmirror.com
 NPM_CACHE_ENABLED=true
 NPM_CACHE_FOLDER=/caches/
-NPM_CACHE_PACKAGE_INFO=true
+NPM_CACHE_PACKAGE_INFO=false
 NPM_CACHE_PACKAGE_CONTENT=true
 ```
 
