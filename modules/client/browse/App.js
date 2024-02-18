@@ -136,7 +136,7 @@ function Link({ css, ...rest }) {
   );
 }
 
-function AppHeader() {
+function AppHeader({baseUrl}) {
   return (
     <header css={{ marginTop: '2rem' }}>
       <h1
@@ -146,7 +146,7 @@ function AppHeader() {
           letterSpacing: '0.05em'
         }}
       >
-        <a href="/" css={{ color: '#000', textDecoration: 'none' }}>
+        <a href={`${baseUrl}/`} css={{ color: '#000', textDecoration: 'none' }}>
           UNPKG
         </a>
       </h1>
@@ -162,6 +162,7 @@ function AppHeader() {
 }
 
 function AppNavigation({
+  baseUrl,
   packageName,
   packageVersion,
   availableVersions,
@@ -179,7 +180,7 @@ function AppNavigation({
   if (filename === '/') {
     breadcrumbs.push(packageName);
   } else {
-    let url = `/browse/${packageName}@${packageVersion}`;
+    let url = `${baseUrl}/browse/${packageName}@${packageVersion}`;
 
     breadcrumbs.push(<Link href={`${url}/`}>{packageName}</Link>);
 
@@ -294,11 +295,12 @@ function PackageVersionPicker({ packageVersion, availableVersions, onChange }) {
   );
 }
 
-function AppContent({ packageName, packageVersion, target }) {
+function AppContent({ baseUrl, packageName, packageVersion, target }) {
   return target.type === 'directory' ? (
     <FolderViewer path={target.path} details={target.details} />
   ) : target.type === 'file' ? (
     <FileViewer
+      baseUrl={baseUrl}
       packageName={packageName}
       packageVersion={packageVersion}
       path={target.path}
@@ -308,6 +310,7 @@ function AppContent({ packageName, packageVersion, target }) {
 }
 
 export default function App({
+  baseUrl,
   packageName,
   packageVersion,
   availableVersions = [],
@@ -331,7 +334,7 @@ export default function App({
             margin: '0 auto'
           }}
         >
-          <AppHeader />
+          <AppHeader baseUrl={baseUrl}/>
         </div>
         <div
           css={{
@@ -341,6 +344,7 @@ export default function App({
           }}
         >
           <AppNavigation
+            baseUrl={baseUrl}
             packageName={packageName}
             packageVersion={packageVersion}
             availableVersions={availableVersions}
@@ -359,6 +363,7 @@ export default function App({
           }}
         >
           <AppContent
+            baseUrl={baseUrl}
             packageName={packageName}
             packageVersion={packageVersion}
             target={target}

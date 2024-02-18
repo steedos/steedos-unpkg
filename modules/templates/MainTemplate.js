@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+import getBaseUrl from '../utils/getBaseUrl.js';
+
 import encodeJSONForScript from '../utils/encodeJSONForScript.js';
 import {
   createElement as e,
@@ -7,6 +9,7 @@ import {
   createScript as x
 } from '../utils/markup.js';
 
+const baseUrl = getBaseUrl();
 const promiseShim =
   'window.Promise || document.write(\'\\x3Cscript src="/es6-promise@4.2.5/dist/es6-promise.min.js">\\x3C/script>\\x3Cscript>ES6Promise.polyfill()\\x3C/script>\')';
 

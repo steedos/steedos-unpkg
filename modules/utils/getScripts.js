@@ -2,6 +2,8 @@
 // eslint-disable-next-line import/no-unresolved
 import entryManifest from 'entry-manifest';
 
+import getBaseUrl from './getBaseUrl.js';
+
 import { createElement, createScript } from './markup.js';
 
 function getEntryPoint(name, format) {
@@ -23,7 +25,7 @@ function getGlobalScripts(entryPoint, globalURLs) {
       }
     }
 
-    return createElement('script', { src: globalURLs[id] });
+    return createElement('script', { src: getBaseUrl() + globalURLs[id] });
   });
 }
 

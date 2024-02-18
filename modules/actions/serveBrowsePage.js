@@ -7,6 +7,7 @@ import asyncHandler from '../utils/asyncHandler.js';
 import getScripts from '../utils/getScripts.js';
 import { createElement, createHTML } from '../utils/markup.js';
 import { getVersionsAndTags } from '../utils/npm.js';
+import getBaseUrl from '../utils/getBaseUrl.js';
 
 const doctype = '<!DOCTYPE html>';
 const globalURLs =
@@ -37,6 +38,7 @@ async function serveBrowsePage(req, res) {
     req.log
   );
   const data = {
+    baseUrl: getBaseUrl(),
     packageName: req.packageName,
     packageVersion: req.packageVersion,
     availableVersions: availableVersions,

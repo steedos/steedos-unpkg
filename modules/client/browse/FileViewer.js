@@ -121,6 +121,7 @@ function BinaryViewer() {
 }
 
 export default function FileViewer({
+  baseUrl,
   packageName,
   packageVersion,
   path,
@@ -135,7 +136,7 @@ export default function FileViewer({
         <span>{language}</span>
         <span>
           <a
-            href={`/${packageName}@${packageVersion}${path}`}
+            href={`${baseUrl}/${packageName}@${packageVersion}${path}`}
             css={{
               display: 'inline-block',
               marginLeft: 8,
