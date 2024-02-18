@@ -18,6 +18,7 @@ function fileRedirect(req, res, entry) {
     })
     .redirect(
       302,
+      req.baseUrl + 
       createPackageURL(
         req.packageName,
         req.packageVersion,
@@ -37,6 +38,7 @@ function indexRedirect(req, res, entry) {
     })
     .redirect(
       302,
+      req.baseUrl + 
       createPackageURL(
         req.packageName,
         req.packageVersion,

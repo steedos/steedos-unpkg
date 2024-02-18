@@ -3,6 +3,8 @@ import express from 'express';
 import morgan from 'morgan';
 import compression from 'compression';
 
+import getBaseUrl from './utils/getBaseUrl.js';
+
 import serveDirectoryBrowser from './actions/serveDirectoryBrowser.js';
 import serveDirectoryMetadata from './actions/serveDirectoryMetadata.js';
 import serveFileBrowser from './actions/serveFileBrowser.js';
@@ -29,7 +31,7 @@ function createApp(callback) {
 }
 
 export default function createServer() {
-  return createApp(app => {
+  const app = createApp(app => {
     app.disable('x-powered-by');
     app.enable('trust proxy');
     app.enable('strict routing');
@@ -135,7 +137,7 @@ export default function createServer() {
 
     // Send old */ requests to the new /browse UI.
     app.get('*/', (req, res) => {
-      res.redirect(302, '/browse' + req.url);
+      res.redirect(302, req.baseUrl + '/browse' + req.url);
     });
 
     app.get(
@@ -149,4 +151,8 @@ export default function createServer() {
       serveFile
     );
   });
+
+  const serverWithBaseUrl = express();
+  serverWithBaseUrl.use( getBaseUrl(), app);
+  return serverWithBaseUrl;
 }
