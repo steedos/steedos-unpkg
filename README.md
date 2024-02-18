@@ -12,16 +12,23 @@ Please visit [the UNPKG website](https://unpkg.com) to learn more about how to u
 ## Getting started
 
 ```
+nvm use 14
 yarn install
 yarn build
-docker build --tag steedos/steedos-unpkg .
 
 export PORT=8080
 export NPM_REGISTRY_URL=https://registry.npmmirror.com
 export UNPKG_WHITE_LIST=react,@steedos,lodash
-docker run -p 8080:8080 -d steedos/steedos-unpkg 
+yarn start
 ```
 
+
+## Build Docker
+
+```
+docker build --tag steedos/steedos-unpkg .
+docker run -p 8080:8080 -d steedos/steedos-unpkg 
+```
 ## 白名单
 
 限制CDN服务器只能访问指定的包。
