@@ -1,6 +1,6 @@
 {
   "name": "@steedos/ee_unpkg",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "The CDN for everything on npm",
   "files": [
     "createServer.js",

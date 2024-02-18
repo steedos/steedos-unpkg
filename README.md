@@ -18,11 +18,11 @@ yarn build
 
 export PORT=8080
 export NPM_REGISTRY_URL=https://registry.npmmirror.com
-export UNPKG_BASE_URL=/unpkg/
 
 yarn start
 ```
 
+访问 http://127.0.0.1:8080/ 
 
 ## Build Docker
 
@@ -30,6 +30,16 @@ yarn start
 docker build --tag steedos/steedos-unpkg .
 docker run -p 8080:8080 -d steedos/steedos-unpkg 
 ```
+
+## Base URL
+
+设置基础URL，用于访问UNPKG服务。
+
+```
+export UNPKG_BASE_URL=/unpkg/
+```
+
+此时需访问 http://127.0.0.1:8080/unpkg/ 
 
 ## 白名单
 
