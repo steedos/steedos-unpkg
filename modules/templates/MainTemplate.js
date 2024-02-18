@@ -28,14 +28,14 @@ export default function MainTemplate({
       'head',
       null,
       // Global site tag (gtag.js) - Google Analytics
-      e('script', {
-        async: true,
-        src: 'https://www.googletagmanager.com/gtag/js?id=UA-140352188-1'
-      }),
-      x(`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'UA-140352188-1');`),
+//       e('script', {
+//         async: true,
+//         src: 'https://www.googletagmanager.com/gtag/js?id=UA-140352188-1'
+//       }),
+//       x(`window.dataLayer = window.dataLayer || [];
+// function gtag(){dataLayer.push(arguments);}
+// gtag('js', new Date());
+// gtag('config', 'UA-140352188-1');`),
       e('meta', { charSet: 'utf-8' }),
       e('meta', { httpEquiv: 'X-UA-Compatible', content: 'IE=edge,chrome=1' }),
       description && e('meta', { name: 'description', content: description }),
