@@ -18,7 +18,8 @@ yarn build
 
 export PORT=8080
 export NPM_REGISTRY_URL=https://registry.npmmirror.com
-export UNPKG_WHITE_LIST=react,@steedos,lodash
+export UNPKG_BASE_URL=/unpkg/
+
 yarn start
 ```
 
@@ -29,6 +30,7 @@ yarn start
 docker build --tag steedos/steedos-unpkg .
 docker run -p 8080:8080 -d steedos/steedos-unpkg 
 ```
+
 ## 白名单
 
 限制CDN服务器只能访问指定的包。
