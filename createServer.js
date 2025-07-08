@@ -119,6 +119,34 @@ function encodePackageName(packageName) {
   return isScopedPackageName(packageName) ? `@${encodeURIComponent(packageName.substring(1))}` : encodeURIComponent(packageName);
 }
 
+/**
+ * 检查文件修改时间是否超过指定天数（同步版本）
+ * @param {string} filePath 文件路径
+ * @param {number} days 天数阈值
+ * @returns {{isExpired: boolean, lastModified: Date, daysDiff: number}}
+ */
+function isFileOlderThanDaysSync(filePath, days) {
+    // 获取文件状态（同步）
+    const stats = fs.statSync(filePath);
+    const lastModified = stats.mtime;
+    
+    // 当前时间
+    const now = new Date();
+    
+    // 计算天数差（毫秒转换为天）
+    const timeDiffMs = now.getTime() - lastModified.getTime();
+    const daysDiff = Math.floor(timeDiffMs / (1000 * 60 * 60 * 24));
+    
+    // 检查是否超过指定天数
+    const isExpired = daysDiff > days;
+    
+    return {
+        isExpired,
+        lastModified,
+        daysDiff
+    };
+}
+
 async function fetchPackageInfo(packageName, log) {
   const name = encodePackageName(packageName);
   const infoURL = `${npmRegistryURL}/${name}`;
@@ -126,11 +154,18 @@ async function fetchPackageInfo(packageName, log) {
 
   if (npmCacheEnabled && npmCacheFolder) {
     const infoFile = path.join(npmCacheFolder, packageName.split('/').join('_') + `.json`);
-
     if (fs.existsSync(infoFile)) {
-      log.debug('Fetching package info for %s from %s', packageName, infoFile);
-      const fileStream = fs.createReadStream(infoFile);
-      return bufferStream(fileStream).then(JSON.parse);
+      let isOld = false;
+      if(process.env.NPM_CACHE_PACKAGE_INFO_EXPIRE_DAYS){
+        const fileOver = await isFileOlderThanDaysSync(infoFile, parseInt(process.env.NPM_CACHE_PACKAGE_INFO_EXPIRE_DAYS));
+        if(fileOver.isExpired){
+          isOld = true;
+        }
+      }
+      if(!isOld){
+        const fileStream = fs.createReadStream(infoFile);
+        return bufferStream(fileStream).then(JSON.parse);
+      }
     }
   }
 

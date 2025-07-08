@@ -117,6 +117,13 @@ NPM_CACHE_PACKAGE_INFO=false
 NPM_CACHE_PACKAGE_CONTENT=true
 ```
 
+### 设置Package info有效期
+
+```
+NPM_CACHE_PACKAGE_INFO_EXPIRE_DAYS
+```
+
+
 ### 与华炎魔方集成
 
 配置环境变量指向本服务，可以启用此服务作为华炎魔方内置的CDN服务。

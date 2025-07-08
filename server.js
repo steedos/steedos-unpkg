@@ -1,3 +1,5 @@
+require('dotenv-flow').config({});
+
 const createServer = require('./createServer.js');
 
 const server = createServer();
