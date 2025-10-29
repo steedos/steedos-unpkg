@@ -34,7 +34,7 @@ var util = _interopDefault(require('util'));
 var validateNpmPackageName = _interopDefault(require('validate-npm-package-name'));
 
 function getBaseUrl() {
-  const baseUrl = process.env.UNPKG_BASE_URL || '/';
+  const baseUrl = process.env.UNPKG_BASE_URL || '/unpkg';
   return baseUrl.replace(/\/+$/, '');
 }
 
@@ -76,7 +76,7 @@ function getIntegrity(data) {
   }, data);
 }
 
-const npmRegistryURL = process.env.NPM_REGISTRY_URL || 'https://registry.npmjs.org';
+const npmRegistryURL = process.env.NPM_CONFIG_REGISTRY || process.env.NPM_REGISTRY_URL || 'https://registry.npmjs.org';
 const npmCacheEnabled = process.env.NPM_CACHE_ENABLED === 'true';
 const npmCacheFolder = process.env.NPM_CACHE_FOLDER || path.join(__dirname, 'caches');
 

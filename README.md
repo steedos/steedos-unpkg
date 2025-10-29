@@ -17,12 +17,10 @@ yarn install
 yarn build
 
 export PORT=8080
-export NPM_REGISTRY_URL=https://registry.npmmirror.com
+export NPM_CONFIG_REGISTRY=https://registry.npmmirror.com
 
 yarn start
 ```
-
-访问 http://127.0.0.1:8080/ 
 
 ## Build Docker
 
@@ -36,10 +34,10 @@ docker run -p 8080:8080 -d steedos/steedos-unpkg
 设置基础URL，用于访问UNPKG服务。
 
 ```
-export UNPKG_BASE_URL=/unpkg/
+export UNPKG_BASE_URL=/unpkg
 ```
 
-此时需访问 http://127.0.0.1:8080/unpkg/ 
+此时需访问 http://127.0.0.1:8080/unpkg
 
 ## 白名单
 
@@ -58,7 +56,7 @@ export UNPKG_WHITE_LIST=react,@steedos,lodash
 设置远程NPM仓库，UNPKG将从此仓库下载软件包。
 
 ```
-NPM_REGISTRY_URL=https://registry.npmmirror.com
+NPM_CONFIG_REGISTRY=https://registry.npmmirror.com
 ```
 
 ## NPM 缓存
@@ -110,17 +108,12 @@ curl -o @steedos-widgets_amis-object-1.1.6.tgz https://registry.npmjs.com/@steed
 在可以访问公网的服务器上启动服务，访问需要缓存的软件包版本，生成 /caches/ 文件夹，复制到内网环境。
 
 ```shell
-NPM_REGISTRY_URL=https://registry.npmmirror.com
+NPM_CONFIG_REGISTRY=https://registry.npmmirror.com
 NPM_CACHE_ENABLED=true
 NPM_CACHE_FOLDER=/caches/
 NPM_CACHE_PACKAGE_INFO=false
+NPM_CACHE_PACKAGE_INFO_EXPIRE_DAYS=7
 NPM_CACHE_PACKAGE_CONTENT=true
-```
-
-### 设置Package info有效期
-
-```
-NPM_CACHE_PACKAGE_INFO_EXPIRE_DAYS
 ```
 
 

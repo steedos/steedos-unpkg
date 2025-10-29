@@ -8,7 +8,7 @@ import fs from 'fs';
 import bufferStream from './bufferStream.js';
 
 const npmRegistryURL =
-  process.env.NPM_REGISTRY_URL || 'https://registry.npmjs.org';
+  process.env.NPM_CONFIG_REGISTRY || process.env.NPM_REGISTRY_URL || 'https://registry.npmjs.org';
 
 const npmCacheEnabled = process.env.NPM_CACHE_ENABLED === 'true'
 const npmCacheFolder =
