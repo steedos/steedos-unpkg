@@ -156,7 +156,7 @@ async function fetchPackageInfo(packageName, log) {
     const infoFile = path.join(npmCacheFolder, packageName.split('/').join('_') + `.json`);
     if (fs.existsSync(infoFile)) {
       let isOld = false;
-      if(process.env.NPM_CACHE_PACKAGE_INFO_EXPIRE_DAYS){
+      if(npmCachePackageInfo && process.env.NPM_CACHE_PACKAGE_INFO_EXPIRE_DAYS){
         const fileOver = await isFileOlderThanDaysSync(infoFile, parseInt(process.env.NPM_CACHE_PACKAGE_INFO_EXPIRE_DAYS));
         if(fileOver.isExpired){
           isOld = true;
