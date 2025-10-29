@@ -34,7 +34,7 @@ var util = _interopDefault(require('util'));
 var validateNpmPackageName = _interopDefault(require('validate-npm-package-name'));
 
 function getBaseUrl() {
-  const baseUrl = process.env.UNPKG_BASE_URL || '/unpkg';
+  const baseUrl = process.env.UNPKG_BASE_URL || '/';
   return baseUrl.replace(/\/+$/, '');
 }
 
