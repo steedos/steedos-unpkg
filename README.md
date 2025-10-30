@@ -29,15 +29,7 @@ docker build --tag steedos/steedos-unpkg .
 docker run -p 8080:8080 -d steedos/steedos-unpkg 
 ```
 
-## Base URL
-
-设置基础URL，用于访问UNPKG服务。
-
-```
-export UNPKG_BASE_URL=/unpkg
-```
-
-此时需访问 http://127.0.0.1:8080/unpkg
+访问 http://127.0.0.1:8080/unpkg
 
 ## 白名单
 
@@ -63,15 +55,17 @@ NPM_CONFIG_REGISTRY=https://registry.npmmirror.com
 
 可以在本地文件夹中缓存npm信息。
 
-- NPM_CACHE_ENABLED 启用缓存。
+- NPM_CACHE_ENABLED 启用缓存。配置为 false 禁用。
 - NPM_CACHE_FOLDER 缓存文件夹的路径，默认为 caches 子文件夹。
-- NPM_CACHE_PACKAGE_INFO 自动保存软件包信息到本地缓存。启用此参数，软件包版本更新后，无法获得最新的信息。
-- NPM_CACHE_PACKAGE_CONTENT 自动保存软件包内容到本地缓存。
+- NPM_CACHE_PACKAGE_INFO 自动保存软件包信息到本地缓存。配置为 false 禁用。
+- NPM_CACHE_PACKAGE_CONTENT 自动保存软件包内容到本地缓存。配置为 false 禁用。
+- NPM_CACHE_AUTO_UPGRADE 启用此参数后，软件包版本更新时，会自动删除本地缓存的软件包信息文件，以便下次请求时获取最新的信息。配置为 false 禁用。
 
 ```shell
 DEBUG=1
 NPM_CACHE_ENABLED=true
 NPM_CACHE_FOLDER=/caches/
+NPM_CACHE_AUTO_UPGRADE=true
 ```
 
 ### 纯内网环境使用CDN
@@ -111,9 +105,9 @@ curl -o @steedos-widgets_amis-object-1.1.6.tgz https://registry.npmjs.com/@steed
 NPM_CONFIG_REGISTRY=https://registry.npmmirror.com
 NPM_CACHE_ENABLED=true
 NPM_CACHE_FOLDER=/caches/
-NPM_CACHE_PACKAGE_INFO=false
-NPM_CACHE_PACKAGE_INFO_EXPIRE_DAYS=7
+NPM_CACHE_PACKAGE_INFO=true
 NPM_CACHE_PACKAGE_CONTENT=true
+NPM_CACHE_AUTO_UPGRADE=true
 ```
 
 

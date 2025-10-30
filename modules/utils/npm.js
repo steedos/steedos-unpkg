@@ -10,7 +10,7 @@ import bufferStream from './bufferStream.js';
 const npmRegistryURL =
   process.env.NPM_CONFIG_REGISTRY || process.env.NPM_REGISTRY_URL || 'https://registry.npmjs.org';
 
-const npmCacheEnabled = process.env.NPM_CACHE_ENABLED === 'true'
+const npmCacheEnabled = process.env.NPM_CACHE_ENABLED !== 'false'
 const npmCacheFolder =
   process.env.NPM_CACHE_FOLDER || path.join(__dirname, 'caches');
 
@@ -23,11 +23,14 @@ if (npmCacheEnabled) {
     });;
 }
 
+const npmCacheAutoUpgrade =
+  process.env.NPM_CACHE_AUTO_UPGRADE !== 'false';
+
 const npmCachePackageInfo =
-  process.env.NPM_CACHE_PACKAGE_INFO === 'true';
+  process.env.NPM_CACHE_PACKAGE_INFO !== 'false';
 
 const npmCachePackageContent =
-  process.env.NPM_CACHE_PACKAGE_CONTENT === 'true';
+  process.env.NPM_CACHE_PACKAGE_CONTENT !== 'false';
 
 const agent = new https.Agent({
   keepAlive: true
@@ -61,11 +64,12 @@ function encodePackageName(packageName) {
     : encodeURIComponent(packageName);
 }
 
+
 async function fetchPackageInfo(packageName, log) {
   const name = encodePackageName(packageName);
   const infoURL = `${npmRegistryURL}/${name}`;
 packageName.split('/').join('_')
-  if (npmCacheEnabled && npmCacheFolder ) {
+  if (npmCacheEnabled && npmCacheFolder && npmCachePackageInfo ) {
     const infoFile = path.join(npmCacheFolder, packageName.split('/').join('_') + `.json`);
     if (fs.existsSync(infoFile)) {
       log.debug('Fetching package info for %s from %s', packageName, infoFile);
@@ -210,7 +214,7 @@ export async function getPackage(packageName, version, log) {
     ? packageName.split('/')[1]
     : packageName;
   
-  if (npmCacheEnabled && npmCacheFolder) {
+  if (npmCacheEnabled && npmCacheFolder && npmCachePackageContent ) {
     const tarballFile = path.join(npmCacheFolder, packageName.split('/').join('_') + `-${version}.tgz`);
     if (fs.existsSync(tarballFile)) {
       log.debug('Fetching package for %s from %s', packageName, tarballFile);
@@ -266,4 +270,17 @@ export async function getPackage(packageName, version, log) {
   log.error(content);
 
   return null;
+}
+
+
+export async function removePackageInfoCache(packageName, log) {
+  if (npmCacheEnabled && npmCacheFolder && npmCacheAutoUpgrade ) {
+    const infoFile = path.join(npmCacheFolder, packageName.split('/').join('_') + `.json`);
+    if (fs.existsSync(infoFile)) {
+      log.debug('Removing package info cache for %s', packageName);
+      const cacheKey = `versions-${packageName}`;
+      cache.del(cacheKey);
+      fs.unlinkSync(infoFile);
+    }
+  }
 }

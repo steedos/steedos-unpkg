@@ -2,7 +2,7 @@ import semver from 'semver';
 
 import asyncHandler from '../utils/asyncHandler.js';
 import createPackageURL from '../utils/createPackageURL.js';
-import { getPackageConfig, getVersionsAndTags } from '../utils/npm.js';
+import { getPackageConfig, getVersionsAndTags, removePackageInfoCache } from '../utils/npm.js';
 
 function semverRedirect(req, res, newVersion) {
   res
@@ -48,6 +48,9 @@ async function validateVersion(req, res, next) {
   );
 
   if (!version) {
+    // if cache package info is enabled, remove cache file
+    removePackageInfoCache(req.packageName, req.log);
+    
     return res
       .status(404)
       .type('text')

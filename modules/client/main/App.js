@@ -153,7 +153,7 @@ export default function App() {
                 padding: '5px 0'
               }}
             >
-              unpkg.com/:package@:version/:file
+              /unpkg/:package@:version/:file
             </div>
 
             {hasStats && <Stats data={stats} />}
@@ -167,13 +167,13 @@ export default function App() {
 
           <ul>
             <li>
-              <Link href="/react@16.7.0/umd/react.production.min.js">
-                unpkg.com/react@16.7.0/umd/react.production.min.js
+              <Link href="/unpkg/react@16.7.0/umd/react.production.min.js">
+                /unpkg/react@16.7.0/umd/react.production.min.js
               </Link>
             </li>
             <li>
-              <Link href="/react-dom@16.7.0/umd/react-dom.production.min.js">
-                unpkg.com/react-dom@16.7.0/umd/react-dom.production.min.js
+              <Link href="/unpkg/react-dom@16.7.0/umd/react-dom.production.min.js">
+                /unpkg/react-dom@16.7.0/umd/react-dom.production.min.js
               </Link>
             </li>
           </ul>
@@ -188,13 +188,13 @@ export default function App() {
 
           <ul>
             <li>
-              <Link href="/react@^16/umd/react.production.min.js">
-                unpkg.com/react@^16/umd/react.production.min.js
+              <Link href="/unpkg/react@^16/umd/react.production.min.js">
+                /unpkg/react@^16/umd/react.production.min.js
               </Link>
             </li>
             <li>
-              <Link href="/react/umd/react.production.min.js">
-                unpkg.com/react/umd/react.production.min.js
+              <Link href="/unpkg/react/umd/react.production.min.js">
+                /unpkg/react/umd/react.production.min.js
               </Link>
             </li>
           </ul>
@@ -207,10 +207,10 @@ export default function App() {
 
           <ul>
             <li>
-              <Link href="/jquery">unpkg.com/jquery</Link>
+              <Link href="/unpkg/jquery">/unpkg/jquery</Link>
             </li>
             <li>
-              <Link href="/three">unpkg.com/three</Link>
+              <Link href="/unpkg/three">/unpkg/three</Link>
             </li>
           </ul>
 
@@ -221,10 +221,10 @@ export default function App() {
 
           <ul>
             <li>
-              <Link href="/react/">unpkg.com/react/</Link>
+              <Link href="/unpkg/react/">/unpkg/react/</Link>
             </li>
             <li>
-              <Link href="/react-router/">unpkg.com/react-router/</Link>
+              <Link href="/unpkg/react-router/">/unpkg/react-router/</Link>
             </li>
           </ul>
 
@@ -323,73 +323,6 @@ export default function App() {
             have a version available on unpkg as well.
           </p>
 
-          <h3 css={{ fontSize: '1.6em' }} id="about">
-            About
-          </h3>
-
-          <p>
-            unpkg is an{' '}
-            <Link href="https://github.com/mjackson/unpkg">open source</Link>{' '}
-            project built and maintained by{' '}
-            <Link href="https://twitter.com/mjackson">Michael Jackson</Link>.
-            unpkg is not affiliated with or supported by npm, Inc. in any way.
-            Please do not contact npm for help with unpkg. Instead, please reach
-            out to <Link href="https://twitter.com/unpkg">@unpkg</Link> with any
-            questions or concerns.
-          </p>
-
-          <p>
-            The unpkg CDN is powered by{' '}
-            <Link href="https://www.cloudflare.com">Cloudflare</Link>, one of
-            the world&apos;s largest and fastest cloud network platforms.{' '}
-            {hasStats && (
-              <span>
-                In the past month, Cloudflare served over{' '}
-                <strong>{formatBytes(stats.totals.bandwidth.all)}</strong> to{' '}
-                <strong>{formatNumber(stats.totals.uniques.all)}</strong> unique
-                unpkg users all over the world.
-              </span>
-            )}
-          </p>
-
-          <div
-            css={{
-              margin: '4em 0',
-              display: 'flex',
-              justifyContent: 'center'
-            }}
-          >
-            <AboutLogo>
-              <a href="https://www.cloudflare.com">
-                <AboutLogoImage
-                  alt="Cloudflare"
-                  src={CloudflareLogo}
-                  height="100"
-                />
-              </a>
-            </AboutLogo>
-          </div>
-
-          <p>
-            The origin server runs on auto-scaling infrastructure provided by{' '}
-            <Link href="https://fly.io/">Fly.io</Link>. The app servers run in
-            17 cities around the world, and come and go based on active
-            requests.
-          </p>
-
-          <div
-            css={{
-              margin: '4em 0 0',
-              display: 'flex',
-              justifyContent: 'center'
-            }}
-          >
-            <AboutLogo>
-              <a href="https://fly.io">
-                <AboutLogoImage alt="Fly.io" src={FlyLogo} width="320" />
-              </a>
-            </AboutLogo>
-          </div>
         </div>
       </div>
 
@@ -415,21 +348,11 @@ export default function App() {
             <span>Build: {buildId}</span>
           </p>
           <p>
-            <span>&copy; {new Date().getFullYear()} UNPKG</span>
+            <span>&copy; {new Date().getFullYear()} Steedos UNPKG</span>
           </p>
           <p css={{ fontSize: '1.5rem' }}>
             <a
-              href="https://twitter.com/unpkg"
-              css={{
-                color: '#aaa',
-                display: 'inline-block',
-                ':hover': { color: 'white' }
-              }}
-            >
-              <TwitterIcon />
-            </a>
-            <a
-              href="https://github.com/mjackson/unpkg"
+              href="https://github.com/steedos/steedos-unpkg"
               css={{
                 color: '#aaa',
                 display: 'inline-block',
