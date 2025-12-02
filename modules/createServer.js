@@ -57,7 +57,7 @@ export default function createServer() {
         app.enable('strict routing');
 
         app.get(
-          '*/',
+          '*dir/',
           noQuery(),
           validatePackagePathname,
           validatePackageName,
@@ -66,7 +66,7 @@ export default function createServer() {
         );
 
         app.get(
-          '*',
+          '*file',
           noQuery(),
           validatePackagePathname,
           validatePackageName,
@@ -82,7 +82,7 @@ export default function createServer() {
       app.enable('strict routing');
 
       app.get(
-        '*/',
+        '*dir/',
         allowQuery('meta'),
         validatePackagePathname,
         validatePackageName,
@@ -92,7 +92,7 @@ export default function createServer() {
       );
 
       app.get(
-        '*',
+        '*file',
         allowQuery('meta'),
         validatePackagePathname,
         validatePackageName,
@@ -116,7 +116,7 @@ export default function createServer() {
       app.enable('strict routing');
 
       app.get(
-        '*',
+        '*module',
         allowQuery('module'),
         validatePackagePathname,
         validatePackageName,
@@ -136,12 +136,12 @@ export default function createServer() {
     });
 
     // Send old */ requests to the new /browse UI.
-    app.get('*/', (req, res) => {
+    app.get('*old/', (req, res) => {
       res.redirect(302, req.baseUrl + '/browse' + req.url);
     });
 
     app.get(
-      '*',
+      '*new',
       noQuery(),
       validatePackagePathname,
       validatePackageName,
