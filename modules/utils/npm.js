@@ -68,7 +68,7 @@ function encodePackageName(packageName) {
 async function fetchPackageInfo(packageName, log) {
   const name = encodePackageName(packageName);
   const infoURL = `${npmRegistryURL}/${name}`;
-packageName.split('/').join('_')
+
   if (npmCacheEnabled && npmCacheFolder && npmCachePackageInfo ) {
     const infoFile = path.join(npmCacheFolder, packageName.split('/').join('_') + `.json`);
     if (fs.existsSync(infoFile)) {
