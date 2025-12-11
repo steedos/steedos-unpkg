@@ -2,7 +2,7 @@
 import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
 import VisuallyHidden from '@reach/visually-hidden';
-import sortBy from 'sort-by';
+// Removed: import sortBy from 'sort-by';
 
 import { formatBytes } from '../utils/format.js';
 
@@ -66,8 +66,9 @@ export default function FolderViewer({ path, details: entries }) {
     { subdirs: [], files: [] }
   );
 
-  subdirs.sort(sortBy('path'));
-  files.sort(sortBy('path'));
+  // REPLACED: Native string sorting using localeCompare
+  subdirs.sort((a, b) => a.path.localeCompare(b.path));
+  files.sort((a, b) => a.path.localeCompare(b.path));
 
   const rows = [];
 
