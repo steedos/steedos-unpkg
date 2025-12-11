@@ -42,7 +42,7 @@
     "express": "^5.1.0",
     "gunzip-maybe": "^1.4.1",
     "highlight.js": "^9.15.8",
-    "isomorphic-fetch": "^2.2.1",
+    "isomorphic-fetch": "^3.0.0",
     "jsesc": "^2.5.2",
     "lru-cache": "^5.1.1",
     "mime": "^2.4.0",
